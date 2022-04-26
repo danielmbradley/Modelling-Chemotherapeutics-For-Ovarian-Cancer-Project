@@ -1,0 +1,6 @@
+numpy~=1.21.4
+tqdm~=4.62.3
+matplotlib~=3.4.3
+pathos~=0.2.8
+scipy~=1.7.2
+invoke~=1.7.0

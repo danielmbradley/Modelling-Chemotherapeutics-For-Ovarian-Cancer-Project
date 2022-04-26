@@ -1,0 +1,25 @@
+\section{Software Documentation}
+
+\subsection{Features}
+
+The developed code for this project has several features which are of note. The primary feature is the ability of the developed code to estimate the order and initial conditions of highly noisy data with reasonable accuracy when a correct model is used. For noise characterisation as well the system performs well, being able to take a noisy dataset, and reconstruct it using a given model with both the main system and the noise in the system. Additionally, the ability to run a Monte Carlo simulation or estimate parameters for a population is also present. The ability to perform estimations on noisy datasets is further improved upon by the ability of the system to also do this with sparse datasets with reasonable accuracy.
+
+Further to this, the program has the ability to easily customise both the dynamics of the system being modelled, and the priors for each of the variables being estimated. These customisable functions are listed at the top of one of the main project file, with clear function names. The end user only needs information on the priors for each parameter to customise the cost function to their own needs.
+
+\subsection{Code Structure} \label{code_structure}
+
+The structure of the code has been developed to be as simple as possible. There are currently 3 primary classes which exist in the code base for consumption. One which has the primary focus on calculating solutions to fractional order derivative, another which again has the focus of calculating fractional order derivatives (although this class is written in C++ and so has limited features when called from Python compared to the pure python version), and an optimisation class which fits a provided dataset to parameters for a model. 
+
+Simply put, the optimiser class takes one of the GLMethod class objects, a dataset, and will return the parameter estimations for the given dataset. In addition it also has the ability to run a Monte Carlo simulation, or perform estimations of parameters for experimental information from a population.
+
+Additionally there is also another class which is not meant for use as a public class, however was still necessary. That is, an iterator for calculating the binomial coefficient needed, as re-calculation of previous coefficients was an incredibly slow process to complete for every new point.
+
+\subsection{Design Choices}
+
+Within the code base a number of design choices have been made for both simplicity of use and for optimisation.
+
+The most obvious decision to be is regarding the language choice for programming the system. Python was chosen due its versatility within the machine learning and scientific community, however it proved too slow for large histories when calculating new points. As a result, the slowest element of the system (namely using the GL method class), was re-written in C++ with a Python wrapper. This results in significant improvements in speed, with around a 52 times performance improvement over simply using python and numpy. This is likely in part as a result of numpy being optimised primarily for matrix and parallelizable operations.
+
+Additionally, the entire structure of the GL Method object is hierarchical, with a function to calculate a solution to any FDE, calling function which will solve FDE's up to the first order, which in turn calls a function which will solve for a point solution. The benefit of this structure is two fold. Firstly it allows for a simpler process of debugging, as every function is compartmentalised. It however also has the side effect of making the class more versatile and potentially useful in the future as well.
+
+Another design choice which was taken in this project was to make use of the scipy library's optimisation functions. This was due to the ease with which box bounds could be added to a problem, in addition to providing access to a wide variety of different optimisation algorithms. 

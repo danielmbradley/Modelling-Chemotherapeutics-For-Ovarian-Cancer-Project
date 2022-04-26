@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lscape}
+\usepackage[table,svgnames, dvipsnames]{xcolor}\usepackage{color}
+\usepackage{pgfgantt}
+\usepackage{array}
+\usepackage{appendix}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage[toc,page]{appendix}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{positioning}
+
+\usepackage[colorlinks]{hyperref}
+\usepackage[symbols,nogroupskip,sort=use]{glossaries-extra}
+
+\makenoidxglossaries
+\glsxtrnewsymbol[description={Caputo Derivative}]{caputo_derivative}{\ensuremath{_{c}D^{\alpha}}}
+\glsxtrnewsymbol[description={Riemann-Liouville Derivative}]{riemann_liouville_derivative}{\ensuremath{_{rl}D^{\alpha}}}
+\glsxtrnewsymbol[description={Gr\"{u}nwald-Letnikov}]{grunwald_letnikov_derivative}{\ensuremath{_{gl}D^{\alpha}}}
+\glsxtrnewsymbol[description={General Dependent Variable}]{general_dependent_variable}{\ensuremath{x}}
+\glsxtrnewsymbol[description={Time Step}]{time_step}{\ensuremath{h}}
+\glsxtrnewsymbol[description={Time Step Index}]{time_step_index}{\ensuremath{k}}
+\glsxtrnewsymbol[description={General Function}]{general_function}{\ensuremath{f(x)}}
+\glsxtrnewsymbol[description={General First Order Derivative Of Function $f(x)$}]{first_order}{\ensuremath{f^{\prime}(x)}}
+\glsxtrnewsymbol[description={General Second Order Derivative Of Function $f(x)$}]{second_order}{\ensuremath{f^{\prime\prime}(x)}}
+\glsxtrnewsymbol[description={General $n$th Order Derivative Of Function $f(x)$}]{general_order_derivative}{\ensuremath{f^{(n)}(x)}}
+
+\graphicspath{ {./images/} }
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\geometry{margin=1.2in}
+
+\onehalfspacing
+
+\begin{document}
+
+\input{Title_Page.tex}
+
+\newpage
+\input{Abstract.tex}
+
+\newpage
+\input{Project_Specification.tex}
+
+\newpage
+\input{Acknowledgments.tex}
+
+\newpage
+\tableofcontents
+
+\newpage
+\printnoidxglossary[type=symbols, style=long, title={List Of Symbols}]
+
+\newpage
+\addcontentsline{toc}{section}{List Of Figures}
+\listoffigures
+
+\newpage
+\addcontentsline{toc}{section}{List Of Tables}
+\listoftables
+
+\newpage
+\input{Introduction.tex}
+
+\newpage
+\input{Theory.tex}
+
+\newpage
+\input{Software_Documentation.tex}
+
+\newpage
+\input{Results.tex}
+
+\newpage
+\input{Discussion.tex}
+
+\newpage
+\input{Conclusions.tex}
+
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{Bibliography.bib}
+
+\input{Appendix_Cover.tex}
+\input{Appendix.tex}
+
+\end{document}

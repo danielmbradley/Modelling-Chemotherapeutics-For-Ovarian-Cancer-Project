@@ -39,7 +39,7 @@ class GLMethodAccelerated:
 
 
     def cost_with_fractional_order_solution(self, parameters, dataset, integration_step, ending_point, x_dataset=None) -> float:
-        if x_dataset == None:
+        if x_dataset is None:
             x_dataset = [0]
             for x in range(1, len(dataset)):
                 x_dataset.append(x_dataset[x-1]+integration_step)

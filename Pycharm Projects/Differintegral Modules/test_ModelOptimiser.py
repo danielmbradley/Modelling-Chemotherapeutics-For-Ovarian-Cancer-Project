@@ -154,7 +154,7 @@ class TestGLMethod(unittest.TestCase):
         sparse_noise_and_y_data = []
         sparse_x_data = []
 
-        for iteration in range(350):
+        for iteration in range(400):
             sparse_noise_and_y_data.append(
                 [self.data[1][-1] + numpy.random.normal(0, self.measurement_noise_std, self.data[1][-1].shape)])
             sparse_x_data.append(self.data[0])
@@ -180,21 +180,21 @@ class TestGLMethod(unittest.TestCase):
                     format='png', dpi=2400)
         plt.show()
 
-        plt.hist(estimated_w_t, density=True, bins=100)
+        plt.hist(estimated_w_t, density=True, bins=10)
         plt.title("Estimate Of Estimation Noise In Population With Different Noise")
         plt.xlabel("Noise Magnitude")
         plt.savefig('Estimated Of Estimation Noise Values - {identify}.png'.format(identify=int(time.time())),
                     format='png', dpi=2400)
         plt.show()
 
-        plt.hist(estimated_w_t_alpha, density=True, bins=100)
+        plt.hist(estimated_w_t_alpha, density=True, bins=10)
         plt.title("Estimate Of Alpha Noise In Population With Different Noise")
         plt.xlabel("Alpha Variation")
         plt.savefig('Estimated Alpha Noise Values - {identify}.png'.format(identify=int(time.time())), format='png',
                     dpi=2400)
         plt.show()
 
-        plt.hist(estimated_v_t, density=True, bins=100)
+        plt.hist(estimated_v_t, density=True, bins=10)
         plt.title("Estimate Of Measurement Noise In Population With Different Noise")
         plt.xlabel("Measurement Noise Magnitude")
         plt.savefig('Estimated Measurement Noise Values - {identify}.png'.format(identify=int(time.time())),

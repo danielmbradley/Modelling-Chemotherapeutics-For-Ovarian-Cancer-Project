@@ -8,7 +8,6 @@
 \usepackage[table,svgnames, dvipsnames]{xcolor}\usepackage{color}
 \usepackage{pgfgantt}
 \usepackage{array}
-\usepackage{appendix}
 \usepackage{setspace}
 \usepackage{listings}
 \usepackage[toc,page]{appendix}
@@ -25,9 +24,12 @@
 \glsxtrnewsymbol[description={General Dependent Variable}]{general_dependent_variable}{\ensuremath{x}}
 \glsxtrnewsymbol[description={Time Step}]{time_step}{\ensuremath{h}}
 \glsxtrnewsymbol[description={Time Step Index}]{time_step_index}{\ensuremath{k}}
+\glsxtrnewsymbol[description={Integer Order Of Differential Equation}]{n}{\ensuremath{n}}
+\glsxtrnewsymbol[description={Fractional Order Of Differential Equation}]{fractional_order}{\ensuremath{\alpha}}
 \glsxtrnewsymbol[description={General Function}]{general_function}{\ensuremath{f(x)}}
 \glsxtrnewsymbol[description={General First Order Derivative Of Function $f(x)$}]{first_order}{\ensuremath{f^{\prime}(x)}}
 \glsxtrnewsymbol[description={General Second Order Derivative Of Function $f(x)$}]{second_order}{\ensuremath{f^{\prime\prime}(x)}}
+\glsxtrnewsymbol[description={General Third Order Derivative Of Function $f(x)$}]{third_order}{\ensuremath{f^{\prime\prime\prime}(x)}}
 \glsxtrnewsymbol[description={General $n$th Order Derivative Of Function $f(x)$}]{general_order_derivative}{\ensuremath{f^{(n)}(x)}}
 
 \graphicspath{ {./images/} }
@@ -66,14 +68,13 @@
 \listoffigures
 
 \newpage
-\addcontentsline{toc}{section}{List Of Tables}
-\listoftables
-
-\newpage
 \input{Introduction.tex}
 
 \newpage
 \input{Theory.tex}
+
+\newpage
+\input{Management.tex}
 
 \newpage
 \input{Software_Documentation.tex}
@@ -81,10 +82,7 @@
 \newpage
 \input{Results.tex}
 
-\newpage
-\input{Discussion.tex}
-
-\newpage
+\clearpage
 \input{Conclusions.tex}
 
 \newpage
@@ -92,6 +90,7 @@
 \bibliography{Bibliography.bib}
 
 \input{Appendix_Cover.tex}
+\clearpage
 \input{Appendix.tex}
 
 \end{document}

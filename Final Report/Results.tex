@@ -1,3 +1,73 @@
-\section{Results}
+\section{Results, Testing and Discussion}
 
-The results of running a number of tests on this project have been moderately successful. In terms of the functionality of estimating purely just the order and initial conditions of the system, the ability of the system to do this can be demonstrated 
+The results of running a number of tests on this project have been highly successful. In terms of the functionality of estimating purely just the order and initial conditions of the system, the ability of the system to do this can be demonstrated using both the least squares form highlighted in Equation \ref{cost_function_one} and the method which makes use of a bayesian approach in Equation \ref{cost_function_three}. 
+
+In Figure \ref{fig:noise_estimation_simulation} the result of running a test on the system can be seen. The testing methodology was simple in nature, comprising of generating a dataset which was fractional order in nature using a predetermined model with the equation $-5\exp(x)$, an order of 0.7 and initial conditions of 1.0. This dataset was then subject to the addition of normally distributed noise with a standard deviation of 0.1 and mean of 0, before finally being thinned from a full set of data at regular steps of 0.01 down to 50 data points at random intervals. This dataset was then given to the estimator which attempted to reconstruct the parameters which could then be used to estimate the values between measurements.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{Images/EstimatedSystem1650946990.png}
+	\caption{Plot of the result of performing parameter and noise estimation on a sparse dataset}
+    \label{fig:noise_estimation_simulation}
+\end{figure}
+
+The same methodology was also able to be used on the least squares form of the system with the slight modification of reducing the number of data points available again to give it only 20. This gave rise to the plot shown in Figure \ref{fig:least_squares_estimation_simulation}. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{Images/EstimatedSystem1650986363.png}
+	\caption{Plot of the result of performing parameter estimation on a sparse dataset using a least squares methodology}
+    \label{fig:least_squares_estimation_simulation}
+\end{figure}
+
+One point to note however is that whilst the results shown are very good, there was some variance between consecutive runs of the estimator with different noise values. Running a Monte Carlo simulation where 12000 estimations were performed, each with new random noise allowed for characterisation of this variance. The plots shown in Figures \ref{fig:least_squares_estimation_monte_carlo_simulation_alpha} and \ref{fig:least_squares_estimation_monte_carlo_simulation_x_0} demonstrate however that the system is remarkably robust at estimating parameters consistently, with noise only resulting in a maximum deviation from the true value of 0.008 for the order $\alpha$ and around 0.3 for the initial conditions.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{Images/EstimatedAlphaValues1650956653.png}
+	\caption{Plot of the result of performing parameter estimation for the order, $\alpha$ of a system using a Monte Carlo on a sparse dataset using a least squares methodology with randomly added noise}
+    \label{fig:least_squares_estimation_monte_carlo_simulation_alpha}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{Images/EstimatedInitialConditionValues1650956669.png}
+	\caption{Plot of the result of performing parameter estimation for the initial conditions of a system using a Monte Carlo method on a sparse dataset using a least squares methodology with randomly added noise}
+    \label{fig:least_squares_estimation_monte_carlo_simulation_x_0}
+\end{figure}
+
+Interestingly, part of the reason behind the difference in the standard deviation of $\alpha$ and the standard deviation of the initial condition estimation appears to be tied to the dependence of the system on having sufficient numbers of data points early in the dataset to aid estimation. This can be seen in Figure \ref{fig:poor_initial_condition_estimate}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{Images/EstimatedSystem1650947998.png}
+	\caption{Plot showing low number of data points in early period of dataset and the associated estimated system}
+    \label{fig:poor_initial_condition_estimate}
+\end{figure}
+
+Another important feature of the developed system is the ability to estimate measurement and estimation noise. In Figure \ref{fig:measurement_noise}, the distribution of measurement noise for a single sparse dataset is shown. The dataset did not have many points available to the system, however despite this it appears to have done a good job to estimating that the distribution was normally distributed, with a mean of 0 and a standard deviation of 0.1, as shown by the peak at 0 that rolls off on either side of the histogram. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{Images/EstimatedMeasurementNoise1650985937}
+	\caption{Plot showing estimated measurement noise which is present in the system}
+    \label{fig:measurement_noise}
+\end{figure}
+
+Another point to take into account in this system is the performance in terms of speed. Initially the function for calculating the solution to a fractional order derivative took an exceptionally long time. In Table 1 the improvement in speed that came from using C++ code in a python wrapper can be clearly seen. This change in speed made the ability to run the Monte Carlo significantly more realistic, in addition to making the estimations of noise in a dataset a viable option, as previously the slow speeds made it unrealistic to use.
+
+
+\begin{center}
+\begin{tabular}{||c c c c||}
+ \hline
+ Number Of Points & C++ Time & Python Time & Performance Improvement Factor \\ [0.5ex] 
+ \hline\hline
+500 & 0.0267s & 1.335s & 49.918 \\ [1ex] 
+ \hline
+5000 & 2.199s & 114.397s & 52.033 \\ [1ex] 
+ \hline
+50000 & 20.898s & 1143.155s & 54.701 \\ [1ex] 
+\hline
+\end{tabular}
+\end{center}
+\caption{Table 1: Table showing respective times taken in second for 2 forms of the code to solve the GL Derivative and the resultant speed improvement}

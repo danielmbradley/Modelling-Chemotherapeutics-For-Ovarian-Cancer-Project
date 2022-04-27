@@ -1,0 +1,17 @@
+\section{Project Management}
+
+The management of this project over the course of the year has required putting in extensive numbers of hours to keep up with the projected deliverables in the interim report at the midway point. In terms of achieving the desired deliverables there has been great success in most of them, with the impact of utilising an agile management style causing some of the targets to change since then.
+
+\subsection{Gr\"{u}nwald-Letnikov}
+
+With respect to the future objectives outlined in the interim report for the GL Method class, the primary targets of producing an iterator and adding the ability to pass the history from an external source were not met. This was in part as the reasoning behind the first of these objectives included that rerunning the functioned in the GLMethod repeatedly would not be possible due to speed constraints. However, utilising the ability to write this function in C++ significantly improved the performance in terms of speed for the respective functions. As such, the structure of an iterator was deemed unnecessary for the moment as the algorithm could simply be recalled for each new step without much of an issue, even at small time steps.
+
+As for the ability to pass in the dataset, this has not yet been completed, though good progress has been made for this. The system currently can make use of sparse datasets which allow for the estimation of intermediate points between provided measurements. This allows for a full ``history" to be produced if the measurements and the estimated points are combined, leaving the final step, and only part left which needs to be completed to be simply to add the ability to pass this combined full history into the GLMethod. 
+
+\subsection{Optimisation and Estimation}
+
+In terms of the objectives for being able to optimise and estimate values, there has been great success in this area. The ModelOptimiser class was developed successfully beyond the simple least squares formation to to be able to estimate the parameters of estimation noise, measurement noise, variation in estimated parameters and the order and initial conditions of a sparse dataset. It took a long time to fully develop this (in particular the element of it that allowed the system to work with sparse datasets), as a bug in the GLMethod class took a long time to be identified before this could be fully developed.
+
+It is interesting to note but, that although originally looking at alternative methods of optimising beyond the L-BFGS-B, this particular objective of using other algorithms ended up not having a large amount of time spent on it, primarily as the reasoning for it was negated. This was because, as with the iterator, initially this was planned in response to slow performance when the system being run. This however was mitigated through other means. 
+
+Overall, in comparison to the objective set at the midway point in the interim report there have been some issues and changes. However, largely the underlying objectives (e.g. speeding up performance, developing the ability to the system to use prior information, etc) have been successfully achieved in the desired time frames. 
